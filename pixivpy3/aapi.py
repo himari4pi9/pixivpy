@@ -423,12 +423,12 @@ class AppPixivAPI(BasePixivAPI):
         type: str | str | None = None,
         req_auth: bool = True,
     ) -> ParsedJson:
-        url = "%s/v1/illust" % self.hosts
+        url = "%s/v1/search/illust" % self.hosts
         params: dict[str, Any] = {
             "word": word,
             "search_target": search_target,
             "sort": sort,
-            "filter": filter,            
+            "filter": filter,
         }
         if start_date:
             params["start_date"] = start_date
