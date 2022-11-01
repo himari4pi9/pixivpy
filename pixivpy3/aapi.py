@@ -420,14 +420,15 @@ class AppPixivAPI(BasePixivAPI):
         end_date: str | None = None,
         filter: _FILTER = "for_ios",
         offset: int | str | None = None,
+        type: str | str | None = None,
         req_auth: bool = True,
     ) -> ParsedJson:
-        url = "%s/v1/search/illust" % self.hosts
+        url = "%s/v1/illust" % self.hosts
         params: dict[str, Any] = {
             "word": word,
             "search_target": search_target,
             "sort": sort,
-            "filter": filter,
+            "filter": filter,            
         }
         if start_date:
             params["start_date"] = start_date
@@ -435,6 +436,8 @@ class AppPixivAPI(BasePixivAPI):
             params["end_date"] = end_date
         if duration:
             params["duration"] = duration
+        if type:
+            params["type"] = type       
         if offset:
             params["offset"] = offset
         r = self.no_auth_requests_call("GET", url, params=params, req_auth=req_auth)
